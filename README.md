@@ -109,6 +109,10 @@ docker-compose up -d --build
 - Keep JWT secret non-default in any shared environment.
 - When changing migrations, reset DB or create forward-only migrations instead of editing existing ones.
 
+## Testing
+
+- Use postman collection provided in the root directory to test all endpoints.
+
 ## Assumptions
 
 -merchant can have only one store.
