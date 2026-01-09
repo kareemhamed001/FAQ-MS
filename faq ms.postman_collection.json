@@ -1,0 +1,864 @@
+{
+	"info": {
+		"_postman_id": "0aab3c5b-365e-4ae8-8b0d-7e82321205fa",
+		"name": "faq ms",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31043574"
+	},
+	"item": [
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/faq-categories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faq-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"category 2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faq-categories",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faq-categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"category 3\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faq-categories/3",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faq-categories",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faq-categories/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faq-categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"category 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faq-categories/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faq-categories",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "faqs",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/faqs",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faqs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "index",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/faqs",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"faqs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Jan 2026 19:56:37 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1544"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"faqs\": [\n            {\n                \"id\": 20,\n                \"category_id\": 2,\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"category 2\"\n                },\n                \"store_id\": 1,\n                \"is_global\": false,\n                \"translations\": [\n                    {\n                        \"id\": 11,\n                        \"faq_id\": 20,\n                        \"language\": \"ar\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    }\n                ]\n            },\n            {\n                \"id\": 19,\n                \"category_id\": 2,\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"category 2\"\n                },\n                \"store_id\": 1,\n                \"is_global\": false,\n                \"translations\": [\n                    {\n                        \"id\": 10,\n                        \"faq_id\": 19,\n                        \"language\": \"ar\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    }\n                ]\n            },\n            {\n                \"id\": 17,\n                \"category_id\": 2,\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"category 2\"\n                },\n                \"store_id\": 1,\n                \"is_global\": false,\n                \"translations\": [\n                    {\n                        \"id\": 6,\n                        \"faq_id\": 17,\n                        \"language\": \"ar\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    },\n                    {\n                        \"id\": 7,\n                        \"faq_id\": 17,\n                        \"language\": \"en\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    }\n                ]\n            },\n            {\n                \"id\": 16,\n                \"category_id\": 2,\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"category 2\"\n                },\n                \"store_id\": null,\n                \"is_global\": true,\n                \"translations\": [\n                    {\n                        \"id\": 4,\n                        \"faq_id\": 16,\n                        \"language\": \"ar\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    },\n                    {\n                        \"id\": 5,\n                        \"faq_id\": 16,\n                        \"language\": \"en\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    }\n                ]\n            },\n            {\n                \"id\": 15,\n                \"category_id\": 2,\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"category 2\"\n                },\n                \"store_id\": null,\n                \"is_global\": true,\n                \"translations\": [\n                    {\n                        \"id\": 3,\n                        \"faq_id\": 15,\n                        \"language\": \"ar\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    }\n                ]\n            },\n            {\n                \"id\": 14,\n                \"category_id\": 2,\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"category 2\"\n                },\n                \"store_id\": null,\n                \"is_global\": true,\n                \"translations\": [\n                    {\n                        \"id\": 2,\n                        \"faq_id\": 14,\n                        \"language\": \"ar\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    }\n                ]\n            },\n            {\n                \"id\": 13,\n                \"category_id\": 2,\n                \"category\": {\n                    \"id\": 2,\n                    \"name\": \"category 2\"\n                },\n                \"store_id\": null,\n                \"is_global\": true,\n                \"translations\": [\n                    {\n                        \"id\": 1,\n                        \"faq_id\": 13,\n                        \"language\": \"ar\",\n                        \"question\": \"how are you\",\n                        \"answer\": \"good\"\n                    }\n                ]\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"category 1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faqs/13",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faqs",
+								"13"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "show",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\":\"category 1\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/faqs/13",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"faqs",
+										"13"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Jan 2026 19:56:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "225"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"faq\": {\n            \"id\": 13,\n            \"category_id\": 2,\n            \"category\": {\n                \"id\": 2,\n                \"name\": \"category 2\"\n            },\n            \"store_id\": null,\n            \"is_global\": true,\n            \"translations\": [\n                {\n                    \"id\": 1,\n                    \"faq_id\": 13,\n                    \"language\": \"ar\",\n                    \"question\": \"how are you\",\n                    \"answer\": \"good\"\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "store",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_id\": 2,\n    \"translations\": [\n        {\n            \"question\": \"how are you\",\n            \"answer\": \"good\",\n            \"language\": \"ar\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faqs",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faqs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "store Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category_id\": 2,\n    \"translations\": [\n        {\n            \"question\": \"how are you\",\n            \"answer\": \"good\",\n            \"language\": \"ar\"\n        }\n    ]\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/faqs",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"faqs"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Jan 2026 17:17:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "246"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"data\": {\n        \"faq\": {\n            \"id\": 19,\n            \"category_id\": 2,\n            \"category\": {\n                \"id\": 2,\n                \"name\": \"category 2\"\n            },\n            \"store_id\": 1,\n            \"is_global\": false,\n            \"translations\": [\n                {\n                    \"id\": 10,\n                    \"faq_id\": 19,\n                    \"language\": \"ar\",\n                    \"question\": \"how are you\",\n                    \"answer\": \"good\"\n                }\n            ]\n        }\n    },\n    \"message\": \"FAQ created successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category_id\": 2,\n    \"translations\": [\n        {\n            \"question\": \"how are you\",\n            \"answer\": \"good\",\n            \"language\": \"ar\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faqs/15",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faqs",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destroy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/faqs/1",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"faqs",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "stores",
+			"item": [
+				{
+					"name": "index",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/api/stores",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"stores"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "index",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/api/stores",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"stores"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Jan 2026 19:52:51 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "315"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"stores\": [\n            {\n                \"id\": 3,\n                \"name\": \"kareem's Store\",\n                \"merchant_id\": 62,\n                \"created_at\": \"2026-01-09T19:52:30.077835Z\"\n            },\n            {\n                \"id\": 2,\n                \"name\": \"kareem's Store\",\n                \"merchant_id\": 60,\n                \"created_at\": \"2026-01-09T01:59:04.417648Z\"\n            },\n            {\n                \"id\": 1,\n                \"name\": \"kareem's Store\",\n                \"merchant_id\": 59,\n                \"created_at\": \"2026-01-08T09:21:16.037711Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "show",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "ar",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/api/stores/2",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"api",
+								"stores",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "show",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "ar",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/api/stores/2",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"api",
+										"stores",
+										"2"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 09 Jan 2026 19:53:03 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1103"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"data\": {\n        \"store\": {\n            \"id\": 2,\n            \"name\": \"kareem's Store\",\n            \"merchant_id\": 60,\n            \"created_at\": \"2026-01-09T01:59:04.417648Z\",\n            \"faqs\": [\n                {\n                    \"id\": 18,\n                    \"category_id\": 2,\n                    \"category\": {\n                        \"id\": 2,\n                        \"name\": \"category 2\"\n                    },\n                    \"store_id\": 2,\n                    \"is_global\": false,\n                    \"translations\": [\n                        {\n                            \"id\": 8,\n                            \"faq_id\": 18,\n                            \"language\": \"ar\",\n                            \"question\": \"how are you\",\n                            \"answer\": \"good\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 16,\n                    \"category_id\": 2,\n                    \"category\": {\n                        \"id\": 2,\n                        \"name\": \"category 2\"\n                    },\n                    \"store_id\": null,\n                    \"is_global\": true,\n                    \"translations\": [\n                        {\n                            \"id\": 4,\n                            \"faq_id\": 16,\n                            \"language\": \"ar\",\n                            \"question\": \"how are you\",\n                            \"answer\": \"good\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 15,\n                    \"category_id\": 2,\n                    \"category\": {\n                        \"id\": 2,\n                        \"name\": \"category 2\"\n                    },\n                    \"store_id\": null,\n                    \"is_global\": true,\n                    \"translations\": [\n                        {\n                            \"id\": 3,\n                            \"faq_id\": 15,\n                            \"language\": \"ar\",\n                            \"question\": \"how are you\",\n                            \"answer\": \"good\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 14,\n                    \"category_id\": 2,\n                    \"category\": {\n                        \"id\": 2,\n                        \"name\": \"category 2\"\n                    },\n                    \"store_id\": null,\n                    \"is_global\": true,\n                    \"translations\": [\n                        {\n                            \"id\": 2,\n                            \"faq_id\": 14,\n                            \"language\": \"ar\",\n                            \"question\": \"how are you\",\n                            \"answer\": \"good\"\n                        }\n                    ]\n                },\n                {\n                    \"id\": 13,\n                    \"category_id\": 2,\n                    \"category\": {\n                        \"id\": 2,\n                        \"name\": \"category 2\"\n                    },\n                    \"store_id\": null,\n                    \"is_global\": true,\n                    \"translations\": [\n                        {\n                            \"id\": 1,\n                            \"faq_id\": 13,\n                            \"language\": \"ar\",\n                            \"question\": \"how are you\",\n                            \"answer\": \"good\"\n                        }\n                    ]\n                }\n            ]\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\":\"kareem\",\n    \"email\":\"khidmt66@gmail.com\",\n    \"password\":\"test@123456789\",\n    \"role\":\"merchant\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/auth/register",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "register",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\":\"kareem\",\n    \"email\":\"khidmt66@gmail.com\",\n    \"password\":\"test@123456789\",\n    \"role\":\"merchant\"\n\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/register",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 09 Jan 2026 19:52:30 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "197"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"user\": {\n            \"id\": 62,\n            \"name\": \"kareem\",\n            \"email\": \"khidmt66@gmail.com\",\n            \"role\": \"merchant\",\n            \"created_at\": \"2026-01-09T19:52:30.019482225Z\",\n            \"updated_at\": \"2026-01-09T19:52:30.019482225Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"khidmt11@gmail.com\",\n    \"password\":\"test@123456789\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/auth/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\":\"khidmt11@gmail.com\",\n    \"password\":\"test@123456789\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/auth/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 09 Jan 2026 19:52:11 GMT"
+						},
+						{
+							"key": "Content-Length",
+							"value": "484"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": {\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NjgwNzQ3MzEsImlhdCI6MTc2Nzk4ODMzMSwicm9sZSI6Im1lcmNoYW50Iiwic3ViIjo1OSwidXNlcl9pZCI6NTl9.CbIl1cDf4xUDYg9mbUu15w5zsFgsvn-pRPLobCEdn00\",\n        \"user\": {\n            \"id\": 59,\n            \"name\": \"kareem\",\n            \"email\": \"khidmt11@gmail.com\",\n            \"role\": \"merchant\",\n            \"store\": {\n                \"id\": 1,\n                \"name\": \"kareem's Store\",\n                \"merchant_id\": 59,\n                \"created_at\": \"2026-01-08T09:21:16.037711Z\"\n            },\n            \"created_at\": \"2026-01-08T09:21:16.037163Z\",\n            \"updated_at\": \"2026-01-08T09:21:16.037163Z\"\n        }\n    }\n}"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		},
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
