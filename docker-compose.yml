@@ -1,0 +1,75 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: faq_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: faq_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d faq_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - faq_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: faq_app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      APP_ENV: production
+      PORT: 8080
+
+      DB_DRIVER: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: admin
+      DB_PASSWORD: admin
+      DB_NAME: faq_db
+      JWT_PRIVATE_KEY: test
+
+      GOOSE_DRIVER: postgres
+      GOOSE_DBSTRING: postgres://admin:admin@postgres:5432/faq_db?sslmode=disable
+      GOOSE_MIGRATION_DIR: ./migrations
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - faq_network
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: faq_pgadmin
+    restart: unless-stopped
+    ports:
+      - "5050:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+      - ./pgadmin-servers.json:/pgadmin4/servers.json
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - faq_network
+
+networks:
+  faq_network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  pgadmin_data:
