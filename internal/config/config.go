@@ -1,6 +1,7 @@
 package config
 
 import (
+	"log"
 	"os"
 	"strconv"
 
@@ -20,7 +21,10 @@ type Config struct {
 }
 
 func NewConfig() *Config {
-	godotenv.Load()
+	if err := godotenv.Load(); err != nil {
+		log.Println("Warning: .env file not found, using system environment variables")
+	}
+
 	return &Config{
 		AppPort:       getEnvInt("APP_PORT", 8080),
 		AppEnv:        getEnvString("APP_ENV", "local"),
