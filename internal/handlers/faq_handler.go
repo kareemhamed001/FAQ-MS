@@ -27,6 +27,10 @@ func (h *FAQHandler) GetAllFAQs(ctx *gin.Context) {
 	page, _ := strconv.Atoi(ctx.DefaultQuery("page", "1"))
 	pageSize, _ := strconv.Atoi(ctx.DefaultQuery("page_size", "20"))
 	sortDir := ctx.DefaultQuery("sort", "desc")
+	language := ctx.GetHeader("Accept-Language")
+	if language == "" {
+		language = "en"
+	}
 
 	userId, Role, err := helpers.GetUserIDAndRoleFromContext(ctx)
 	if err != nil {
@@ -34,13 +38,18 @@ func (h *FAQHandler) GetAllFAQs(ctx *gin.Context) {
 		return
 	}
 
-	faqs, err := h.fAQService.GetAllFAQs(ctx.Request.Context(), search, Role, uint(userId), page, pageSize, sortDir)
+	faqs, total, err := h.fAQService.GetAllFAQs(ctx.Request.Context(), search, Role, uint(userId), page, pageSize, sortDir, language)
 	if err != nil {
 		helpers.WriteAPIResponse(ctx, nil, err.Error(), h.statusForError(err))
 		return
 	}
 
-	helpers.WriteAPIResponse(ctx, gin.H{"faqs": faqs}, "FAQs retrieved successfully", 200)
+	helpers.WriteAPIResponse(ctx, gin.H{
+		"faqs":      faqs,
+		"total":     total,
+		"page":      page,
+		"page_size": pageSize,
+	}, "FAQs retrieved successfully", 200)
 }
 
 func (h *FAQHandler) GetFAQByID(ctx *gin.Context) {
@@ -52,13 +61,19 @@ func (h *FAQHandler) GetFAQByID(ctx *gin.Context) {
 		return
 	}
 
+	language := ctx.GetHeader("Accept-Language")
+	if language == "" {
+		language = "en"
+	}
+	includeAllTranslations := ctx.DefaultQuery("include_all_translations", "false") == "true"
+
 	userId, Role, err := helpers.GetUserIDAndRoleFromContext(ctx)
 	if err != nil {
 		helpers.WriteAPIResponse(ctx, nil, err.Error(), 401)
 		return
 	}
 
-	faq, err := h.fAQService.GetFAQByID(ctx.Request.Context(), query.ID, Role, uint(userId))
+	faq, err := h.fAQService.GetFAQByID(ctx.Request.Context(), query.ID, Role, uint(userId), language, includeAllTranslations)
 	if err != nil {
 		helpers.WriteAPIResponse(ctx, nil, err.Error(), h.statusForError(err))
 		return
@@ -146,7 +161,7 @@ func (h *FAQHandler) DeleteFAQ(ctx *gin.Context) {
 		return
 	}
 
-	helpers.WriteAPIResponse(ctx, nil, "FAQ deleted successfully", 204)
+	helpers.WriteAPIResponse(ctx, nil, "FAQ deleted successfully", 200)
 }
 
 func (h *FAQHandler) statusForError(err error) int {
