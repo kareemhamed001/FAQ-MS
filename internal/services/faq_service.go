@@ -26,11 +26,12 @@ func NewFAQService(DB *gorm.DB) *FAQService {
 	return &FAQService{DB: DB}
 }
 
-func (s *FAQService) GetAllFAQs(ctx context.Context, search string, role types.UserRole, userId uint, page, pageSize int, sortDir string) ([]models.FAQ, error) {
+func (s *FAQService) GetAllFAQs(ctx context.Context, search string, role types.UserRole, userId uint, page, pageSize int, sortDir string, language string) ([]models.FAQ, int64, error) {
+
 	faqQuery := s.DB.WithContext(ctx).
 		Model(&models.FAQ{}).
-		Preload("Translations").
-		Preload("Category")
+		Preload("Category").
+		Preload("Translations")
 
 	if search != "" {
 		faqQuery = faqQuery.Joins("JOIN translations ON translations.faq_id = faqs.id").
@@ -43,7 +44,7 @@ func (s *FAQService) GetAllFAQs(ctx context.Context, search string, role types.U
 	case types.RoleMerchant:
 		faqQuery = faqQuery.Where("faqs.store_id IN (SELECT id FROM stores WHERE merchant_id = ?)", userId)
 	default:
-		return nil, ErrUnsupportedRole
+		return nil, 0, ErrUnsupportedRole
 	}
 
 	if page < 1 {
@@ -58,6 +59,11 @@ func (s *FAQService) GetAllFAQs(ctx context.Context, search string, role types.U
 		order = "faqs.id ASC"
 	}
 
+	var total int64
+	if err := faqQuery.Distinct("faqs.id").Count(&total).Error; err != nil {
+		return nil, 0, err
+	}
+
 	var faqs []models.FAQ
 	err := faqQuery.Distinct("faqs.*").
 		Order(order).
@@ -65,12 +71,18 @@ func (s *FAQService) GetAllFAQs(ctx context.Context, search string, role types.U
 		Offset((page - 1) * pageSize).
 		Find(&faqs).Error
 	if err != nil {
-		return nil, err
+		return nil, 0, err
 	}
-	return faqs, nil
+
+	// Filter translations by language, with fallback
+	for i := range faqs {
+		faqs[i].Translations = s.filterTranslations(faqs[i].Translations, language)
+	}
+
+	return faqs, total, nil
 }
 
-func (s *FAQService) GetFAQByID(ctx context.Context, id uint, role types.UserRole, userId uint) (*models.FAQ, error) {
+func (s *FAQService) GetFAQByID(ctx context.Context, id uint, role types.UserRole, userId uint, language string, includeAllTranslations bool) (*models.FAQ, error) {
 	faq, err := s.loadFAQ(ctx, id)
 	if err != nil {
 		return nil, err
@@ -78,6 +90,11 @@ func (s *FAQService) GetFAQByID(ctx context.Context, id uint, role types.UserRol
 
 	if err := s.ensureCanViewFAQ(ctx, role, userId, faq); err != nil {
 		return nil, err
+	}
+
+	// Filter translations by language unless caller wants all of them
+	if !includeAllTranslations {
+		faq.Translations = s.filterTranslations(faq.Translations, language)
 	}
 
 	return faq, nil
@@ -358,4 +375,29 @@ func (s *FAQService) getMerchantStoreID(db *gorm.DB, merchantID uint) (uint, err
 		return 0, err
 	}
 	return store.ID, nil
+}
+
+// filterTranslations filters translations to show only the requested language
+// Falls back to English if requested language not found, then to first available
+func (s *FAQService) filterTranslations(translations []models.Translation, language string) []models.Translation {
+	if len(translations) == 0 {
+		return translations
+	}
+
+	// Try to find exact language match
+	for _, t := range translations {
+		if t.Language == language {
+			return []models.Translation{t}
+		}
+	}
+
+	// Fallback to English
+	for _, t := range translations {
+		if t.Language == "en" {
+			return []models.Translation{t}
+		}
+	}
+
+	// Return first available translation
+	return []models.Translation{translations[0]}
 }
