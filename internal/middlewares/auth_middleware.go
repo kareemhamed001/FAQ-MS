@@ -4,9 +4,9 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	appErrors "github.com/kareemhamed001/blog/internal/errors"
-	"github.com/kareemhamed001/blog/internal/helpers"
-	"github.com/kareemhamed001/blog/internal/responses"
+	appErrors "github.com/kareemhamed001/faq/internal/errors"
+	"github.com/kareemhamed001/faq/internal/helpers"
+	"github.com/kareemhamed001/faq/internal/responses"
 )
 
 // AuthMiddleware validates JWT token for any authenticated user and populates context claims.

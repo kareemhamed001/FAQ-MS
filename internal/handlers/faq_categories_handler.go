@@ -2,8 +2,8 @@ package handlers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/kareemhamed001/blog/internal/helpers"
-	"github.com/kareemhamed001/blog/internal/services"
+	"github.com/kareemhamed001/faq/internal/helpers"
+	"github.com/kareemhamed001/faq/internal/services"
 )
 
 type FAQCategoryHandler struct {

@@ -1,7 +1,7 @@
 package services
 
 import (
-	"github.com/kareemhamed001/blog/internal/models"
+	"github.com/kareemhamed001/faq/internal/models"
 	"gorm.io/gorm"
 )
 

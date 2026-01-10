@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/kareemhamed001/blog/internal/handlers"
+	"github.com/kareemhamed001/faq/internal/handlers"
 )
 
 func SetupAuthRoutes(router *gin.Engine, authHandler handlers.AuthHandler) {

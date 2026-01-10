@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/kareemhamed001/blog/internal/types"
+	"github.com/kareemhamed001/faq/internal/types"
 )
 
 type User struct {

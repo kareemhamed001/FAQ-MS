@@ -2,9 +2,9 @@ package routes
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/kareemhamed001/blog/internal/handlers"
-	"github.com/kareemhamed001/blog/internal/middlewares"
-	"github.com/kareemhamed001/blog/internal/types"
+	"github.com/kareemhamed001/faq/internal/handlers"
+	"github.com/kareemhamed001/faq/internal/middlewares"
+	"github.com/kareemhamed001/faq/internal/types"
 )
 
 func SetupFaqCategoriesRoutes(router *gin.Engine, faqCategoryHandler handlers.FAQCategoryHandler, jwtSecret string) {

@@ -4,10 +4,10 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	appErrors "github.com/kareemhamed001/blog/internal/errors"
-	"github.com/kareemhamed001/blog/internal/helpers"
-	"github.com/kareemhamed001/blog/internal/responses"
-	"github.com/kareemhamed001/blog/internal/types"
+	appErrors "github.com/kareemhamed001/faq/internal/errors"
+	"github.com/kareemhamed001/faq/internal/helpers"
+	"github.com/kareemhamed001/faq/internal/responses"
+	"github.com/kareemhamed001/faq/internal/types"
 )
 
 func HasRole(roles []types.UserRole, jwtSecret string) gin.HandlerFunc {

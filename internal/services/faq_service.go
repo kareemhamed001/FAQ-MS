@@ -4,9 +4,9 @@ import (
 	"context"
 	"errors"
 
-	dtos "github.com/kareemhamed001/blog/internal/DTOs"
-	"github.com/kareemhamed001/blog/internal/models"
-	"github.com/kareemhamed001/blog/internal/types"
+	dtos "github.com/kareemhamed001/faq/internal/DTOs"
+	"github.com/kareemhamed001/faq/internal/models"
+	"github.com/kareemhamed001/faq/internal/types"
 	"gorm.io/gorm"
 )
 
@@ -41,9 +41,7 @@ func (s *FAQService) GetAllFAQs(ctx context.Context, search string, role types.U
 	case types.RoleAdmin:
 		// Admin sees everything
 	case types.RoleMerchant:
-		faqQuery = faqQuery.Where("faqs.is_global = ? OR faqs.store_id IN (SELECT id FROM stores WHERE merchant_id = ?)", true, userId)
-	case types.RoleCustomer:
-		faqQuery = faqQuery.Where("faqs.is_global = ?", true)
+		faqQuery = faqQuery.Where("faqs.store_id IN (SELECT id FROM stores WHERE merchant_id = ?)", userId)
 	default:
 		return nil, ErrUnsupportedRole
 	}

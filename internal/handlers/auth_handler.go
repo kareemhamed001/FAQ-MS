@@ -4,11 +4,11 @@ import (
 	"regexp"
 
 	"github.com/gin-gonic/gin"
-	appErrors "github.com/kareemhamed001/blog/internal/errors"
-	"github.com/kareemhamed001/blog/internal/requests"
-	"github.com/kareemhamed001/blog/internal/responses"
-	"github.com/kareemhamed001/blog/internal/services"
-	"github.com/kareemhamed001/blog/internal/types"
+	appErrors "github.com/kareemhamed001/faq/internal/errors"
+	"github.com/kareemhamed001/faq/internal/requests"
+	"github.com/kareemhamed001/faq/internal/responses"
+	"github.com/kareemhamed001/faq/internal/services"
+	"github.com/kareemhamed001/faq/internal/types"
 )
 
 type AuthHandler struct {
@@ -101,7 +101,7 @@ func validateRole(role types.UserRole) bool {
 	if len(role) == 0 {
 		return false
 	}
-	if role != types.RoleAdmin && role != types.RoleMerchant && role != types.RoleCustomer {
+	if role != types.RoleMerchant && role != types.RoleCustomer {
 		return false
 	}
 	// Add role validation logic here (e.g., check if role is one of the allowed roles)

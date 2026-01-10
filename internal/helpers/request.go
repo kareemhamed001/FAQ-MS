@@ -5,7 +5,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kareemhamed001/blog/internal/types"
+	"github.com/kareemhamed001/faq/internal/types"
 )
 
 func GetUserIDAndRoleFromContext(ctx *gin.Context) (uint64, types.UserRole, error) {

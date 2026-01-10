@@ -2,7 +2,7 @@ package helpers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/kareemhamed001/blog/internal/responses"
+	"github.com/kareemhamed001/faq/internal/responses"
 )
 
 // WriteAPIResponse is kept for backward compatibility; prefer responses.WriteSuccess / WriteError.

@@ -5,7 +5,7 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"github.com/kareemhamed001/blog/internal/helpers"
+	"github.com/kareemhamed001/faq/internal/helpers"
 )
 
 func SetUserData(jwtSecret string) gin.HandlerFunc {

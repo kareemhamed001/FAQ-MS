@@ -3,9 +3,9 @@ package services
 import (
 	"errors"
 
-	"github.com/kareemhamed001/blog/internal/helpers"
-	"github.com/kareemhamed001/blog/internal/models"
-	"github.com/kareemhamed001/blog/internal/types"
+	"github.com/kareemhamed001/faq/internal/helpers"
+	"github.com/kareemhamed001/faq/internal/models"
+	"github.com/kareemhamed001/faq/internal/types"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )

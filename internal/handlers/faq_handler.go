@@ -5,9 +5,9 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
-	dtos "github.com/kareemhamed001/blog/internal/DTOs"
-	"github.com/kareemhamed001/blog/internal/helpers"
-	"github.com/kareemhamed001/blog/internal/services"
+	dtos "github.com/kareemhamed001/faq/internal/DTOs"
+	"github.com/kareemhamed001/faq/internal/helpers"
+	"github.com/kareemhamed001/faq/internal/services"
 )
 
 type FAQHandler struct {
