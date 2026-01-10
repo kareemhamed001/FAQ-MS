@@ -8,12 +8,12 @@ import (
 )
 
 func SetupFaqCategoriesRoutes(router *gin.Engine, faqCategoryHandler handlers.FAQCategoryHandler, jwtSecret string) {
-	auth := router.Group("/api", middlewares.HasRole([]types.UserRole{types.RoleAdmin}, jwtSecret))
+	auth := router.Group("/api")
 
 	faqCategories := auth.Group("/faq-categories")
-	faqCategories.GET("/", faqCategoryHandler.GetAllCategories)
-	faqCategories.GET("/:id", faqCategoryHandler.GetCategoryByID)
-	faqCategories.POST("/", faqCategoryHandler.CreateCategory)
-	faqCategories.PUT("/:id", faqCategoryHandler.UpdateCategory)
-	faqCategories.DELETE("/:id", faqCategoryHandler.DeleteCategory)
+	faqCategories.GET("/", middlewares.HasRole([]types.UserRole{types.RoleAdmin, types.RoleMerchant}, jwtSecret), faqCategoryHandler.GetAllCategories)
+	faqCategories.GET("/:id", middlewares.HasRole([]types.UserRole{types.RoleAdmin}, jwtSecret), faqCategoryHandler.GetCategoryByID)
+	faqCategories.POST("/", middlewares.HasRole([]types.UserRole{types.RoleAdmin}, jwtSecret), faqCategoryHandler.CreateCategory)
+	faqCategories.PUT("/:id", middlewares.HasRole([]types.UserRole{types.RoleAdmin}, jwtSecret), faqCategoryHandler.UpdateCategory)
+	faqCategories.DELETE("/:id", middlewares.HasRole([]types.UserRole{types.RoleAdmin}, jwtSecret), faqCategoryHandler.DeleteCategory)
 }
