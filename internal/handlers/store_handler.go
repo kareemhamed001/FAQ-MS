@@ -40,6 +40,9 @@ func (h *StoreHandler) GetStore(ctx *gin.Context) {
 	}
 
 	language := ctx.GetHeader("Accept-Language")
+	if language == "" {
+		language = "en"
+	}
 
 	storeWithFAQs, err := h.storeService.GetStoreWithFAQs(ctx.Request.Context(), uri.ID, language)
 	if err != nil {
