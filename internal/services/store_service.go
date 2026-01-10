@@ -52,20 +52,24 @@ func (s *StoreService) GetStoreWithFAQs(ctx context.Context, storeID uint, langu
 		return nil, err
 	}
 
+	if language == "" {
+		language = "en"
+	}
+
 	query := s.DB.WithContext(ctx).
 		Model(&models.FAQ{}).
 		Where("store_id = ? OR is_global = ?", storeID, true).
 		Preload("Category").
+		Preload("Translations").
 		Order("id DESC")
-
-	translationArgs := []interface{}{}
-	if language != "" {
-		translationArgs = append(translationArgs, "language = ?", language)
-	}
-	query = query.Preload("Translations", translationArgs...)
 
 	if err := query.Find(&store.FAQs).Error; err != nil {
 		return nil, err
+	}
+
+	// Apply translation fallback per FAQ: prefer requested language, then English, then first available
+	for i := range store.FAQs {
+		store.FAQs[i].Translations = filterTranslationsWithFallback(store.FAQs[i].Translations, language)
 	}
 
 	return &store, nil
@@ -89,4 +93,26 @@ func (s *StoreService) GetStoreByMerchantID(merchantID uint) (*models.Store, err
 		return nil, err
 	}
 	return &store, nil
+}
+
+// filterTranslationsWithFallback returns a single translation slice honoring the requested language,
+// then English, then any available translation.
+func filterTranslationsWithFallback(translations []models.Translation, language string) []models.Translation {
+	if len(translations) == 0 {
+		return translations
+	}
+
+	for _, t := range translations {
+		if t.Language == language {
+			return []models.Translation{t}
+		}
+	}
+
+	for _, t := range translations {
+		if t.Language == "en" {
+			return []models.Translation{t}
+		}
+	}
+
+	return []models.Translation{translations[0]}
 }
