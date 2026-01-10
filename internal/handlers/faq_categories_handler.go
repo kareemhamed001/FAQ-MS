@@ -117,5 +117,5 @@ func (h *FAQCategoryHandler) DeleteCategory(ctx *gin.Context) {
 		helpers.WriteAPIResponse(ctx, nil, err.Error(), 500)
 		return
 	}
-	helpers.WriteAPIResponse(ctx, nil, "Category deleted successfully", 204)
+	helpers.WriteAPIResponse(ctx, nil, "Category deleted successfully", 200)
 }
