@@ -3,15 +3,17 @@ package main
 import (
 	"log"
 	"strconv"
+	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	db "github.com/kareemhamed001/blog/internal/DB"
-	"github.com/kareemhamed001/blog/internal/config"
-	"github.com/kareemhamed001/blog/internal/handlers"
-	"github.com/kareemhamed001/blog/internal/logger"
-	"github.com/kareemhamed001/blog/internal/middlewares"
-	"github.com/kareemhamed001/blog/internal/routes"
-	"github.com/kareemhamed001/blog/internal/services"
+	db "github.com/kareemhamed001/faq/internal/DB"
+	"github.com/kareemhamed001/faq/internal/config"
+	"github.com/kareemhamed001/faq/internal/handlers"
+	"github.com/kareemhamed001/faq/internal/logger"
+	"github.com/kareemhamed001/faq/internal/middlewares"
+	"github.com/kareemhamed001/faq/internal/routes"
+	"github.com/kareemhamed001/faq/internal/services"
 )
 
 func main() {
@@ -32,6 +34,17 @@ func main() {
 
 	router := gin.Default()
 	router.Use(gin.Recovery())
+
+	// Allow frontend origins to call the API during development.
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:8081"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization", "Accept-Language"},
+		ExposeHeaders:    []string{"Content-Length", "Authorization"},
+		AllowCredentials: true,
+		MaxAge:           12 * time.Hour,
+	}))
+
 	router.Use(middlewares.SetUserData(config.JWTPrivateKey))
 
 	router.GET("/health", func(c *gin.Context) {
