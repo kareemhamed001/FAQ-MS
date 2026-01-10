@@ -38,3 +38,5 @@ main
 # OS Specific
 .DS_Store
 Thumbs.db
+
+go.sum
